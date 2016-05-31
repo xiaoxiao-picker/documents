@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>App下载</title>
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<style type="text/css">
+	
+		*{
+			margin:0;
+			padding:0;
+		}
+		
+		html,body{
+			height:100%;
+		}
+		body{
+			background-size:100%;
+			background-image:url('./images/bg.jpg');
+			background-repeat:no-repeat;
+			position: relative;
+			font-size: 14px;
+		}
+		.download-container{
+			position:absolute;
+			bottom:0;
+			left:0;
+			right:0;
+			text-align: center;
+			padding:20px 40px; 
+		}
+
+		.wechat-code{
+			color:#fff;
+			line-height:20px;
+			padding:50px 50px 70px;
+			background-color:rgb(79,85,88);
+			transform:translateY(-172px);
+			transition: all 1s ease-in-out;
+			-webkit-transform:translateY(-172px);
+			-webkit-transition: all 1s ease-in-out;
+			position:relative;
+			box-sizing: border-box;
+		}
+		.wechat-code>img{
+			position:absolute;
+			top:40px;
+			right:10px;
+			width:50px;
+		}
+		.wechat-code.active{
+			transform:translateY(0);
+			-webkit-transform:translateY(0);
+		}
+		.wechat-code>p{
+			margin-bottom: 6px;
+			font-size: 18px;
+		}
+
+		.btn{
+			width:100%;
+			margin:20px 0;
+			display:block;
+			border-radius:4px;
+			border:none;
+			padding:15px 0;
+			color:#fff;
+			background-color:#E79526;
+			font-size: 16px;
+			font-family: serif;
+			text-decoration: none;
+		}
+
+		.description{
+			line-height:20px;
+			font-size: 14px;
+		}
+
+		@keyframes topOut{
+			from{
+				transform: translateY(0);
+				opacity:1;
+			}
+			to{
+				transform: translateY(-30px);
+				opacity:0;
+			}
+		}
+	</style>
+	<script type="text/javascript">
+		var browser = {
+		versions: function() {
+			var u = navigator.userAgent,
+				app = navigator.appVersion;
+			return { //移动终端浏览器版本信息
+				trident: u.indexOf('Trident') > -1, //IE内核
+				presto: u.indexOf('Presto') > -1, //opera内核
+				webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+				gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+				mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+				ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+				android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+				iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+				iPad: u.indexOf('iPad') > -1, //是否iPad
+				webApp: u.indexOf('Safari') == -1,
+				WX: u.toLowerCase().indexOf('micromessenger') != -1
+					//是否web应该程序，没有头部与底部
+			};
+		}(),
+		language: (navigator.browserLanguage || navigator.language).toLowerCase()
+		};
+
+		function download(type){
+			if(browser.versions.WX){
+				document.getElementById("wechatCode").className="wechat-code active";
+				return;
+			}
+			window.location.href=type=="android"?"http://112.124.63.135:8080/hddscf/user/apk/app-release.apk":"http://fir.im/gplv";
+		}
+
+		// http://112.124.63.135:8080/hddscf/user/apk/app-release.apk
+		// http://fir.im/gplv
+	</script>
+</head>
+<body>
+	<div id="wechatCode" class="wechat-code">
+		<p>请点击右上角菜单</p>
+		<p>选择在浏览器中打开并安装应用</p>
+		<img src="./images/arrow.png">
+	</div>
+	<div class="download-container">
+		<div class="description">
+			e家物流是浙江齐利物流有限公司研发的一款app，用户可以在app上在线发布货物物流，送货人身份用户可以查看附近的物流信息并抢单，更方便的服务大家。
+		</div>
+		<a class="btn btn-android" href="javascript:void(0);" onclick="window.download('android')">Android下载</a>
+		<a class="btn btn-android" href="javascript:void(0);" onclick="window.download('ios')">iOS下载</a>
+	</div>
+
+</body>
+</html>
